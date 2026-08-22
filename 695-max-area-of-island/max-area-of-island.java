@@ -1,19 +1,20 @@
 class Solution {
 
-    public int maxAreaOfIsland(int[][] grid) {
+    int area;
 
-        int rows = grid.length;
-        int cols = grid[0].length;
+    public int maxAreaOfIsland(int[][] grid) {
 
         int maxArea = 0;
 
-        for (int i = 0; i < rows; i++) {
+        for (int i = 0; i < grid.length; i++) {
 
-            for (int j = 0; j < cols; j++) {
+            for (int j = 0; j < grid[0].length; j++) {
 
                 if (grid[i][j] == 1) {
 
-                    int area = dfs(grid, i, j);
+                    area = 0;
+
+                    dfs(grid, i, j);
 
                     maxArea = Math.max(maxArea, area);
                 }
@@ -23,24 +24,22 @@ class Solution {
         return maxArea;
     }
 
-    private int dfs(int[][] grid, int row, int col) {
+    private void dfs(int[][] grid, int row, int col) {
 
         if (row < 0 || row >= grid.length ||
             col < 0 || col >= grid[0].length ||
             grid[row][col] == 0) {
 
-            return 0;
+            return;
         }
 
         grid[row][col] = 0;
 
-        int area = 1;
+        area++;
 
-        area += dfs(grid, row - 1, col);
-        area += dfs(grid, row + 1, col);
-        area += dfs(grid, row, col - 1);
-        area += dfs(grid, row, col + 1);
-
-        return area;
+        dfs(grid, row - 1, col);
+        dfs(grid, row + 1, col);
+        dfs(grid, row, col - 1);
+        dfs(grid, row, col + 1);
     }
 }
