@@ -21,6 +21,6 @@ class Solution {
             dp[i] = Math.max(skip, rob);
         }
 
-        return dp[n - 1];
+        return dp[n-1];
     }
 }
