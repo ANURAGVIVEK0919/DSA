@@ -32,7 +32,7 @@ class Solution {
 
         int n = cost.length;
 
-        dp = new int[n];
+        dp = new int[n+1];
 
         Arrays.fill(dp, -1);
 
