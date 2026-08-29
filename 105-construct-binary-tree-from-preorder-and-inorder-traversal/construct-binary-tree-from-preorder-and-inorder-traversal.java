@@ -1,32 +1,36 @@
 class Solution {
 
     int preIndex = 0;
+    HashMap<Integer, Integer> map = new HashMap<>();
 
     public TreeNode buildTree(int[] preorder, int[] inorder) {
-        return build(preorder, inorder, 0, inorder.length - 1);
+
+        // Inorder ke elements ke indexes store karo
+        for (int i = 0; i < inorder.length; i++) {
+            map.put(inorder[i], i);
+        }
+
+        return build(preorder, 0, inorder.length - 1);
     }
 
-    private TreeNode build(int[] preorder, int[] inorder, int left, int right) {
+    public TreeNode build(int[] preorder, int left, int right) {
 
         if (left > right) {
             return null;
         }
 
-        int rootValue = preorder[preIndex++];
-        TreeNode root = new TreeNode(rootValue);
+        // Preorder se root
+        int value = preorder[preIndex++];
+        TreeNode root = new TreeNode(value);
 
-        int index = 0;
+        // Inorder me root ka index
+        int index = map.get(value);
 
-        for (int i = left; i <= right; i++) {
-            if (inorder[i] == rootValue) {
-                index = i;
-                break;
-            }
-        }
+        // Left subtree
+        root.left = build(preorder, left, index - 1);
 
-        root.left = build(preorder, inorder, left, index - 1);
-
-        root.right = build(preorder, inorder, index + 1, right);
+        // Right subtree
+        root.right = build(preorder, index + 1, right);
 
         return root;
     }
