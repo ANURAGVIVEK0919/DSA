@@ -1,10 +1,11 @@
 class Solution {
 
     List<List<Integer>> result = new ArrayList<>();
+    List<Integer>  current = new ArrayList<>();
 
     public List<List<Integer>> subsets(int[] nums) {
 
-        backtrack(nums, 0, new ArrayList<>());
+        backtrack(nums, 0, current);
 
         return result;
     }
