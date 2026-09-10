@@ -5,14 +5,15 @@ class Solution {
         List<List<Integer>> ans = new ArrayList<>();
         List<Integer> current = new ArrayList<>();
         boolean[] used = new boolean[nums.length];
+        int index=0;
 
-        backtrack(nums, current, used, ans);
+        backtrack(nums, current, used, ans,index);
 
         return ans;
     }
 
     private void backtrack(int[] nums, List<Integer> current,
-                           boolean[] used, List<List<Integer>> ans) {
+                           boolean[] used, List<List<Integer>> ans ,int index) {
 
         if (current.size() == nums.length) {
             ans.add(new ArrayList<>(current));
@@ -28,7 +29,7 @@ class Solution {
             current.add(nums[i]);
             used[i] = true;
 
-            backtrack(nums, current, used, ans);
+            backtrack(nums, current, used, ans, index+1);
 
             current.remove(current.size() - 1);
             used[i] = false;
