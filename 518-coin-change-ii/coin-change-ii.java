@@ -16,9 +16,7 @@ class Solution {
         }
         
         //This will remove unnecessary call
-        if(coins[i] > amount) {
-            return memo[i][amount] = numberOfWays(coins, i + 1, amount);
-        }
+        
 
         int take = numberOfWays(coins, i, amount - coins[i]);
         int skip = numberOfWays(coins, i + 1, amount);
