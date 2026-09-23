@@ -1,33 +1,19 @@
 class Solution {
-
-    int[] t = new int[10001];
-
-    boolean solve(int[] nums, int n, int idx) {
-
-        if (idx == n - 1)
-            return true;
-
-        if (t[idx] != -1)
-            return t[idx] == 1;
-
-        for (int i = 1; i <= nums[idx]; i++) {
-
-            if (solve(nums, n, idx + i)) {
-                t[idx] = 1;
-                return true;
-            }
-        }
-
-        t[idx] = 0;
-        return false;
-    }
-
     public boolean canJump(int[] nums) {
 
-        int n = nums.length;
+        int maxReach = 0;
 
-        Arrays.fill(t, -1);
+        for (int i = 0; i < nums.length; i++) {
 
-        return solve(nums, n, 0);
+            if (i > maxReach)
+                return false;
+
+            maxReach = Math.max(maxReach, i + nums[i]);
+
+            if (maxReach >= nums.length - 1)
+                return true;
+        }
+
+        return true;
     }
 }
